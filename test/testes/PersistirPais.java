@@ -5,9 +5,15 @@
  */
 package testes;
 
+import java.awt.TrayIcon;
+import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.swing.JOptionPane;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
 import modelo.Pais;
 
 /**
@@ -23,19 +29,30 @@ public class PersistirPais {
         EntityManager em = emf.createEntityManager();
 
         Pais p = new Pais();
-        // p.setId(1);
-        p.setNome("Brasil");
-        p.setIso("pt-BR");
+        p.setNome("Moçambique");
+        p.setIso("MOZ"
+                + "");
 
         // Operaçao de persistencia
         em.getTransaction().begin(); // inicia a transaçao
-        try {
-            em.persist(p); // persiste o objeto
-            em.getTransaction().commit(); // confirma a transaçao
-        } catch (Exception e) {
-            em.getTransaction().rollback(); // anula a operaçao em caso de erro
-        } finally {
-            em.close();
+        Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
+        Set<ConstraintViolation<Pais>> erros = validator.validate(p);
+        if (erros.size() > 0) {
+            for (ConstraintViolation<Pais> erro : erros) {
+                //System.out.println("Erro " + erro.getMessage());
+                String str = "Erro " + erro.getMessage();
+                JOptionPane.showMessageDialog(null, str);
+            }
+        } else {
+            try {
+                em.persist(p); // persiste o objeto
+                em.getTransaction().commit(); // confirma a transaçao
+            } catch (Exception e) {
+                em.getTransaction().rollback(); // anula a operaçao em caso de erro
+            } finally {
+                em.close();
+                emf.close();
+            }
         }
     }
 

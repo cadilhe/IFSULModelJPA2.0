@@ -12,6 +12,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
 
 /**
  *
@@ -25,13 +28,17 @@ public class Pais implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     
+    @Length(max = 50, message = "O nome só pode ter até 50 caracteres.")
+    @NotBlank(message = "O campo nome não pode ficar em branco.")
+    @NotNull(message = "O nome é obrigatório")
     private String nome;
-    
+    @Length(max = 3, message = "O nome só pode ter até 50 caracteres.")
+    @NotBlank(message = "O campo ISO não pode ficar em branco.")
+    @NotNull(message = "O ISO não pode ser nulo")
     private String iso;
     
         
     // Getters e Setters
-
     
     public Integer getId() {
         return id;

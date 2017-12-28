@@ -14,7 +14,7 @@ import modelo.Pais;
  *
  * @author sigaln
  */
-public class AlterarPais {
+public class ExcluirPais {
 
     public static void main(String[] args) {
 
@@ -22,10 +22,9 @@ public class AlterarPais {
         EntityManager em = emf.createEntityManager();
 
         // Para atualizar um registro, primeiro precisamos encontrá-lo no BD com o método find
-        Pais p = em.find(Pais.class, 1);
-        p.setIso("BRA");
+        Pais p = em.find(Pais.class, 3);
         em.getTransaction().begin();
-        em.merge(p);
+        em.remove(p);
         em.getTransaction().commit();
         em.close();
         emf.close();

@@ -22,12 +22,11 @@ public class ExcluirPais {
         EntityManager em = emf.createEntityManager();
 
         // Para atualizar um registro, primeiro precisamos encontrá-lo no BD com o método find
-        Pais p = em.find(Pais.class, 3);
+        Pais p = em.find(Pais.class, 5);
         em.getTransaction().begin();
         em.remove(p);
         em.getTransaction().commit();
         em.close();
-        emf.close();
         emf.close();
 
     }

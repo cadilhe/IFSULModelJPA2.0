@@ -5,7 +5,6 @@
  */
 package testes;
 
-import java.awt.TrayIcon;
 import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -29,8 +28,8 @@ public class PersistirPais {
         EntityManager em = emf.createEntityManager();
 
         Pais p = new Pais();
-        p.setNome("Moçambique");
-        p.setIso("MOZ"
+        p.setNome("Zimbabwe");
+        p.setIso("ZBW"
                 + "");
 
         // Operaçao de persistencia

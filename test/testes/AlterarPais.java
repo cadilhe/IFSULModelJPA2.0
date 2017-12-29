@@ -29,8 +29,6 @@ public class AlterarPais {
         em.getTransaction().commit();
         em.close();
         emf.close();
-        emf.close();
-
     }
 
 }
